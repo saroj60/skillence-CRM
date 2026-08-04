@@ -22,7 +22,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'status',
     ];
+
+    /**
+     * Get the leads assigned to the user.
+     */
+    public function leads()
+    {
+        return $this->hasMany(Lead::class, 'assigned_to');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -22,3 +22,10 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Temp / Log files
+error.txt
+output.txt
+phpinfo.txt
+users.txt
+*out*.txt
