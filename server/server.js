@@ -66,19 +66,36 @@ app.use('/api/documents', documentRoutes);
 app.use('/api/visa-records', visaRoutes);
 app.use('/api/users', userRoutes);
 
-// Global Error Handler
-app.use((err, req, res, next) => {
-  console.error('SERVER ERROR:', err.stack);
-  res.status(500).json({ error: err.message || 'Internal Server Error' });
-});
+// Serve React frontend static files
+const clientDistPath = path.resolve(__dirname, '../client/dist');
+app.use(express.static(clientDistPath));
 
 // Fallback index / API root
 app.get('/api', (req, res) => {
   res.json({ message: 'Skellence CRM API Server is online.' });
 });
 
+// All other routes redirect to React's index.html (client-side routing)
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
+  res.sendFile(path.resolve(clientDistPath, 'index.html'), (err) => {
+    if (err) {
+      res.status(404).send('Not found');
+    }
+  });
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error('SERVER ERROR:', err.stack);
+  res.status(500).json({ error: err.message || 'Internal Server Error' });
+});
+
 // Listen
 app.listen(PORT, () => {
   console.log(`Express server running on http://localhost:${PORT}`);
   console.log(`Serving storage files from ${storagePath}`);
+  console.log(`Serving client assets from ${clientDistPath}`);
 });

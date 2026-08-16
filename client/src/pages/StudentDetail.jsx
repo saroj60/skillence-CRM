@@ -226,10 +226,9 @@ export default function StudentDetail() {
 
     try {
       // Use native fetch to upload file (since api.request will stringify standard objects, we pass FormData directly)
-      const token = api.getToken();
-      const response = await fetch('http://localhost:5000/api/documents', {
+      const response = await fetch('/api/documents', {
         method: 'POST',
-        headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+        credentials: 'include',
         body: formData
       });
       const data = await response.json();
@@ -653,7 +652,7 @@ export default function StudentDetail() {
                         <td style={{ textAlign: 'right' }}>
                           <div style={{ display: 'inline-flex', gap: '8px' }}>
                             <a 
-                              href={`http://localhost:5000/api/documents/${doc.id}/download`} 
+                              href={`/api/documents/${doc.id}/download`} 
                               target="_blank" 
                               rel="noreferrer"
                               className="btn btn-secondary btn-sm"
