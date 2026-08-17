@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "npm run build --prefix client",
+        "build": "cd client && npm install && npm run build",
         "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
         "start": "npm run start --prefix server"
     },
