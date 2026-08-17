@@ -1,1 +1,2 @@
-*.sqlite*
+# Keep sqlite database tracked
+
