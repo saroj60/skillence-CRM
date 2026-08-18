@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Define storage disk path
-const storageRoot = path.resolve(__dirname, '../../storage/app/public');
+const storageRoot = process.env.STORAGE_PATH || path.resolve(__dirname, '../../storage/app/public');
 
 // Custom storage engine for multer to dynamically route uploads to correct student subdirectories
 const diskStorage = multer.diskStorage({

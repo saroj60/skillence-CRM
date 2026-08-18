@@ -50,7 +50,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Static route to serve uploaded documents from Laravel's storage folder
-const storagePath = path.resolve(__dirname, '../storage/app/public');
+const storagePath = process.env.STORAGE_PATH || path.resolve(__dirname, '../storage/app/public');
 app.use('/storage', express.static(storagePath));
 
 // API router mounts
