@@ -33,7 +33,7 @@ export default function Login() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1 className="auth-logo">Skellence CRM</h1>
+        <h1 className="auth-logo">Skillence CRM</h1>
 
         {error && <div className="alert alert-error">{error}</div>}
 

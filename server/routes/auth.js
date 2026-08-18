@@ -5,7 +5,7 @@ import { queryOne } from '../db.js';
 import { authenticateToken } from '../authMiddleware.js';
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'skellence_crm_secret_key_2026';
+const JWT_SECRET = process.env.JWT_SECRET || 'skillence_crm_secret_key_2026';
 
 // POST /api/auth/login
 router.post('/login', async (req, res) => {

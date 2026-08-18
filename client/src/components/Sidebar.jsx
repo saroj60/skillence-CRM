@@ -18,7 +18,7 @@ export default function Sidebar() {
   return (
     <aside className="app-sidebar">
       <div className="sidebar-header">
-        Skellence CRM
+        Skillence CRM
       </div>
       
       <nav className="sidebar-nav">

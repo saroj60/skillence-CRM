@@ -72,7 +72,7 @@ app.use(express.static(clientDistPath));
 
 // Fallback index / API root
 app.get('/api', (req, res) => {
-  res.json({ message: 'Skellence CRM API Server is online.' });
+  res.json({ message: 'Skillence CRM API Server is online.' });
 });
 
 // All other routes redirect to React's index.html (client-side routing)

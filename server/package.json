@@ -1,7 +1,7 @@
 {
-  "name": "skellence-crm-server",
+  "name": "skillence-crm-server",
   "version": "1.0.0",
-  "description": "Express Backend for Skellence CRM",
+  "description": "Express Backend for Skillence CRM",
   "main": "server.js",
   "type": "module",
   "scripts": {

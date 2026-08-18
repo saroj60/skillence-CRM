@@ -60,7 +60,7 @@ export default function Track() {
         <Link to="/login" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'var(--text-muted)', fontSize: '14px', fontWeight: 500 }}>
           <ArrowLeft size={16} /> Portal Login
         </Link>
-        <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)' }}>Skellence Status Tracker</span>
+        <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)' }}>Skillence Status Tracker</span>
       </div>
 
       <div className="card" style={{ maxWidth: data ? '880px' : '440px', width: '100%', padding: '32px', boxShadow: 'var(--shadow-lg)' }}>
