@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Exclude /api and /storage from rewrites
+  RewriteRule ^api(/|$) - [L]
+  RewriteRule ^storage(/|$) - [L]
+  
+  # Serve index.html if the requested resource is not a file or directory
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+</IfModule>

@@ -30,3 +30,5 @@ output.txt
 phpinfo.txt
 users.txt
 *out*.txt
+*.zip
+

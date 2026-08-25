@@ -15,9 +15,8 @@ import Applications from './pages/Applications.jsx';
 import Staff from './pages/Staff.jsx';
 import Track from './pages/Track.jsx';
 
-// Protected layout wrapper
 function AppLayout() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   
   return (
     <div className="app-layout">
@@ -27,8 +26,15 @@ function AppLayout() {
       {/* Main workspace */}
       <div className="app-content">
         <header className="app-header">
-          <div className="user-profile-badge">
-            Signed in as: <strong>{user?.name}</strong> ({user?.email})
+          <div className="user-profile-badge" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <span>Signed in as: <strong>{user?.name}</strong> ({user?.email})</span>
+            <button 
+              onClick={logout} 
+              className="btn btn-secondary btn-sm"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            >
+              Logout
+            </button>
           </div>
         </header>
 

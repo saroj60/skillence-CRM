@@ -19,7 +19,19 @@ const api = {
 
     try {
       const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
-      const data = await response.json();
+      
+      const contentType = response.headers.get('content-type');
+      let data = {};
+      
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        const errorMsg = text ? (text.slice(0, 150) + (text.length > 150 ? '...' : '')) : `Server returned status ${response.status}`;
+        const error = new Error(errorMsg);
+        error.status = response.status;
+        throw error;
+      }
 
       if (!response.ok) {
         // If unauthorized, clear token and redirect (optional, handled by context)
