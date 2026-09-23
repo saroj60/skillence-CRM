@@ -66,7 +66,7 @@ export default function StudentDetail() {
   const [appInterviewStatus, setAppInterviewStatus] = useState('Not Required');
 
   // Document Upload state
-  const [docType, setDocType] = useState('Passport');
+  const [docType, setDocType] = useState('');
   const [docFile, setDocFile] = useState(null);
   const [uploadingDoc, setUploadingDoc] = useState(false);
 
@@ -578,25 +578,43 @@ export default function StudentDetail() {
             <h2 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '20px' }}>Uploaded Documents</h2>
             
             {/* Upload form */}
-            <form onSubmit={handleUploadDoc} style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-end', padding: '16px', backgroundColor: 'var(--bg-main)', borderRadius: '8px', marginBottom: '24px' }}>
-              <div className="form-group" style={{ margin: 0, minWidth: '180px' }}>
-                <label className="form-label">Document Type</label>
-                <select 
-                  className="form-control form-select"
+            <form onSubmit={handleUploadDoc} style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-start', padding: '20px', backgroundColor: 'var(--bg-main)', borderRadius: '12px', border: '1px solid var(--border)', marginBottom: '24px' }}>
+              <div className="form-group" style={{ margin: 0, flex: '1 1 280px' }}>
+                <label className="form-label">Document Name / Type</label>
+                <input 
+                  type="text" 
+                  className="form-control"
+                  placeholder="Type document name (e.g. Passport, Citizenship...)"
                   value={docType} 
                   onChange={(e) => setDocType(e.target.value)}
-                >
-                  <option value="Passport">Passport</option>
-                  <option value="Transcript">Transcript</option>
-                  <option value="SOP">SOP</option>
-                  <option value="CV">CV</option>
-                  <option value="Recommendation Letter">Recommendation Letter</option>
-                  <option value="Financial Document">Financial Document</option>
-                  <option value="Other">Other</option>
-                </select>
+                  required
+                />
+                {/* Quick suggestion chips */}
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '10px' }}>
+                  {['Passport', 'Transcript', 'SOP', 'CV', 'Recommendation Letter', 'Financial Document', 'Citizenship', 'IELTS Scorecard', 'Offer Letter', 'Work Experience'].map(chip => (
+                    <button
+                      key={chip}
+                      type="button"
+                      onClick={() => setDocType(chip)}
+                      style={{
+                        background: docType === chip ? 'var(--primary)' : 'var(--bg-card)',
+                        color: docType === chip ? '#fff' : 'var(--text-muted)',
+                        border: '1px solid var(--border-dark)',
+                        borderRadius: '16px',
+                        padding: '3px 10px',
+                        fontSize: '11px',
+                        fontWeight: 500,
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      + {chip}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <div className="form-group" style={{ margin: 0, flex: 1, minWidth: '220px' }}>
+              <div className="form-group" style={{ margin: 0, flex: '1 1 240px' }}>
                 <label className="form-label">Select File (PDF, JPG, PNG)</label>
                 <input 
                   type="file" 
@@ -610,8 +628,8 @@ export default function StudentDetail() {
               <button 
                 type="submit" 
                 className="btn btn-primary" 
-                disabled={uploadingDoc || !docFile}
-                style={{ height: '42px' }}
+                disabled={uploadingDoc || !docFile || !docType.trim()}
+                style={{ height: '42px', minWidth: '120px', marginTop: '22px' }}
               >
                 <Upload size={14} /> {uploadingDoc ? 'Uploading...' : 'Upload'}
               </button>
