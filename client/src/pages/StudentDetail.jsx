@@ -641,7 +641,7 @@ export default function StudentDetail() {
                 <thead>
                   <tr>
                     <th>Type</th>
-                    <th>File Path</th>
+                    <th>File Name</th>
                     <th>Uploaded Date</th>
                     <th>Status</th>
                     <th style={{ textAlign: 'right' }}>Actions</th>
@@ -658,8 +658,8 @@ export default function StudentDetail() {
                     documents.map((doc) => (
                       <tr key={doc.id}>
                         <td style={{ fontWeight: 500 }}>{doc.type}</td>
-                        <td style={{ fontFamily: 'monospace', fontSize: '12px', color: 'var(--text-muted)' }}>
-                          {doc.file_path.split('/').pop()}
+                        <td style={{ fontSize: '13px', color: 'var(--text-main)', fontWeight: 500 }}>
+                          {doc.original_name || doc.file_path.split('/').pop()}
                         </td>
                         <td>{new Date(doc.created_at).toLocaleDateString()}</td>
                         <td>

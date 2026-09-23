@@ -28,6 +28,18 @@ async function updateSchema() {
     }
   }
 
+  try {
+    // Add original_name to documents
+    await db.run('ALTER TABLE documents ADD COLUMN original_name VARCHAR(255);');
+    console.log('✅ Added column "original_name" to "documents" table.');
+  } catch (err) {
+    if (err.message.includes('duplicate column name')) {
+      console.log('ℹ️ Column "original_name" already exists.');
+    } else {
+      throw err;
+    }
+  }
+
   console.log('🎉 Schema update completed successfully!');
   process.exit(0);
 }

@@ -74,11 +74,13 @@ router.post('/', authenticateToken, (req, res, next) => {
   // Store path relative to storageRoot (Laravel compatibility: 'documents/{id}/filename')
   const relativePath = path.relative(storageRoot, file.path).replace(/\\/g, '/');
 
+  const originalName = file.originalname || path.basename(file.path);
+
   try {
     const result = await execute(`
-      INSERT INTO documents (student_id, type, file_path, status, created_at, updated_at)
-      VALUES (?, ?, ?, 'Pending', ?, ?)
-    `, [student_id, type, relativePath, now, now]);
+      INSERT INTO documents (student_id, type, file_path, original_name, status, created_at, updated_at)
+      VALUES (?, ?, ?, ?, 'Pending', ?, ?)
+    `, [student_id, type, relativePath, originalName, now, now]);
 
     return res.status(201).json({
       message: 'Document uploaded successfully.',
